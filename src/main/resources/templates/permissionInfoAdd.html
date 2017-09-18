@@ -1,0 +1,29 @@
+<form id="add-table" xmlns:th="http://www.w3.org/1999/xhtml">
+    <table>
+        <tr>
+            <td>名称:<input type="text" name="name"/></td>
+        </tr>
+        <tr>
+            <td>资源类别:<select name="resourceType" id="resourceType"><option value="menu">menu</option><option value="button">button</option></select></td>
+        </tr>
+        <tr id="parent" style="display: none">
+            <td>菜单:<select name="parentId"><option th:each="sysPermission:${sysPermissions}" th:value="${sysPermission.id}" th:text="${sysPermission.name}"></option></select></td>
+        </tr>
+        <tr>
+            <td>资源路径:<input type="text" name="url"/></td>
+        </tr>
+        <tr>
+            <td>权限:<input type="text" name="permission"/></td>
+        </tr>
+    </table>
+</form>
+
+<script>
+    $("#resourceType").change(function () {
+        if($(this).val() == "button"){
+            $("#parent").show();
+        }else {
+            $("#parent").hide();
+        }
+    })
+</script>

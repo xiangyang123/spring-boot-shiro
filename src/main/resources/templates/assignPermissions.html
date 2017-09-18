@@ -1,0 +1,13 @@
+<ul id='menu-tree'></ul>
+<script>
+    $(function () {
+        var row = $('#dataGrid').datagrid('getSelected');
+        $("#menu-tree").tree({
+            url: "assignMenu?roleId="+row.id,
+            checkbox:true,
+            cascadeCheck:false,
+            animate:true
+        })
+    })
+
+</script>

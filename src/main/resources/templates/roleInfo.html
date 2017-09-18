@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="htmlhead">
+    <title>角色管理</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/easyui/icon.css}"/>
+    <link rel="stylesheet" th:href="@{/easyui/default/easyui.css}" />
+    <script th:src="@{/easyui/jquery-1.4.2.min.js}"></script>
+    <script th:src="@{/easyui/jquery.easyui.min.js}"></script>
+    <script th:src="@{/easyui/js/easyui-1.4.2/locale/easyui-lang-zh_CN.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            var datagrid;  //定义全局变量
+            var editRow = "";//定义当前编辑的行
+            datagrid = $("#dataGrid").datagrid({
+                title: "角色管理",
+                locale: "zh_CN",
+                iconCls: 'icon-save',
+                striped: true,
+                sortOrder: "desc",
+                collapsible: false,
+                url: "findAllSysRole",
+                columns: [[
+                    { field: 'id', title: 'ID',width:50,align:"center", formatter: function(value,row,index){
+                        return row.id;
+                    }},
+                    { field: 'description', title: '角色',width:80,align:"center"},
+                    { field: 'role', title: '角色标识',width:80,align:"center"},
+                    { field: 'available', title: '是否可用',width:100,align:"center", formatter: function(value,row,index){
+                        var available = row.available;
+                        if(available){
+                            return "可用";
+                        }else {
+                            return "不可用";
+                        }
+                    }},
+                ]],
+                toolbar: [{
+                    id: 'btnAdd',
+                    text: "添加",
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        $("#add").dialog({
+                            title: '新增用户',
+                            width: 400,
+                            height: 200,
+                            closed: false,
+                            cache: false,
+                            href: 'sysRoleAdd',
+                            modal: true,
+                            buttons:[{
+                                text:'保存',
+                                iconCls:'icon-add',
+                                handler:function () {
+                                    $.post("submitRoleAdd",$("#add-table").serialize(),function (result) {
+                                        $("#add").dialog('close');
+                                        $.messager.show({
+                                            title:'成功',
+                                            msg:'保存成功！',
+                                            timeout:2000,
+                                            showType:'slide'
+                                        });
+                                        $("#dataGrid").datagrid('reload');
+                                    },"json");
+
+                                }
+                            },{
+                                text:'取消',
+                                iconCls:'icon-cancel',
+                                handler:function () {
+                                    $("#add").dialog('close');
+                                }
+                            }
+
+                            ]
+                        });
+
+                    }
+                }, {
+                    id: 'btnEdit',
+                    text: "修改",
+                    iconCls: 'icon-edit',
+                    handler: function () {
+                        $.messager.alert("修改","修改!","info");
+                    }
+                }, {
+                    id: 'btnDelete',
+                    text: "删除",
+                    iconCls: 'icon-remove',
+                    handler: function () {
+                        var row = $('#dataGrid').datagrid('getSelected');
+                        var id = row.uid;
+                        deleteUser(row);
+                    }
+                }, {
+                    id: 'btnDelete',
+                    text: "分配权限",
+                    iconCls: 'icon-remove',
+                    handler: function () {
+                        $("#add").dialog({
+                            title: '分配权限',
+                            width: 400,
+                            height: 200,
+                            closed:false,
+                            cache: false,
+                            href: 'assignPermissions',
+                            modal: true,
+                            buttons:[{
+                                text:'确认分配',
+                                iconCls:'icon-add',
+                                handler:function () {
+                                    var row = $('#dataGrid').datagrid('getSelected');
+                                    var roleId = row.id;
+                                    var nodes = $('#menu-tree').tree('getChecked');
+                                    var permissions = [];
+                                    for (var i = 0;i<nodes.length;i++) {
+                                        permissions.push(nodes[i].id);
+                                    }
+                                    $.post("submitAssignPermissions",{"roleId":roleId,"permissions":JSON.stringify(permissions)},function (result) {
+                                        $("#add").dialog('close');
+                                        $.messager.show({
+                                            title:'成功',
+                                            msg:'分配成功！',
+                                            timeout:2000,
+                                            showType:'slide'
+                                        });
+                                        $("#dataGrid").datagrid('reload');
+                                    },"json");
+
+                                }
+                            },{
+                                text:'取消',
+                                iconCls:'icon-cancel',
+                                handler:function () {
+                                    $("#add").dialog('close');
+                                }
+                            }
+
+                            ],
+                        });
+                        $("#add").dialog('open').dialog('refresh', 'assignPermissions');
+                    }
+                }],
+                pagination: true,//表示在datagrid设置分页
+                pageList:[5,10,20],
+                rownumbers: true,
+                singleSelect: true,
+            });
+        })
+
+        function deleteUser(row){
+            if(row){
+                $.messager.confirm("系统提示","您确定要删除这条记录吗?",function(r){
+                    if(r){
+                        $.post('userDelete',{delId:row.uid},function(result){
+                            if(result == '1'){
+                                $.messager.show({
+                                    title:'成功',
+                                    msg:'删除成功！',
+                                    timeout:2000,
+                                    showType:'slide'
+                                });
+                                $("#dataGrid").datagrid('reload');
+                            }else{
+                                $.messager.alert("系统提示",result.errorMsg);
+                            }
+                        },'json');
+                    }
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+<!--数据展示 -->
+<div id="dataGrid"></div>
+<div id="add"></div>
+
+</body>
+
+</html>
