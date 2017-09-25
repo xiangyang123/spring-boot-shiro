@@ -10,4 +10,6 @@ public interface SecKillService {
     SecKill findById(int goodsId);
 
     int resumeSecKill(SecKill secKill);
+
+    String kill(String customer, int goodsId) throws InterruptedException;
 }

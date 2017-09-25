@@ -1,6 +1,6 @@
 spring:
     datasource:
-      url: jdbc:mysql://localhost:3306/test
+      url: jdbc:mysql://localhost:3306/test1
       username: root
       password: 123456
       #schema: database/import.sql
@@ -36,3 +36,14 @@ spring:
     thymeleaf:
        cache: false
        mode: LEGACYHTML5
+
+    redis:
+      database: 0
+      host: localhost
+      port: 6379
+      password:
+      pool:
+        max-active: 8
+        min-idle: 0
+        max-wait: -1
+      timeout: 0

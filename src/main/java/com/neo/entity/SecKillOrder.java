@@ -52,4 +52,10 @@ public class SecKillOrder implements Serializable {
     public void setNum(int num) {
         this.num = num;
     }
+
+    public SecKillOrder(String customerName, int goodsId, int num) {
+        this.customerName = customerName;
+        this.goodsId = goodsId;
+        this.num = num;
+    }
 }
