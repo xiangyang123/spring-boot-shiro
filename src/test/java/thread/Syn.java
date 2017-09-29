@@ -19,7 +19,7 @@ public class Syn implements Runnable{
     public static void main(String[] args) {
         Syn syn = new Syn();
         for (int i = 0; i < 5; i++) {
-            new Thread(syn,"Thread:"+i).start();
+            new Thread(syn,"ThreadDemo:"+i).start();
         }
     }
 }
