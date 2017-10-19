@@ -12,6 +12,11 @@ import javax.transaction.Transactional;
  */
 public interface SecKillDao extends JpaRepository<SecKill,Integer> {
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Query("update SecKill s set s.remainNum = s.remainNum - 1 where s.id = ?1 and s.remainNum > 0")
     @Modifying
     @Transactional

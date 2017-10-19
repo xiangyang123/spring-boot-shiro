@@ -49,7 +49,9 @@ public class TreeNoteUtil {
     private final static List<MenuTree> getChildrenNode(Integer pId, List<SysPermission> sysPermissionsList, List<SysPermission> selectPermissionList){
         List<MenuTree> newTrees = new ArrayList<MenuTree>();
         for (SysPermission sysPermission : sysPermissionsList) {
-            if (sysPermission.getParentId() == 0L) continue;
+            if (sysPermission.getParentId() == 0L) {
+                continue;
+            }
             if(sysPermission.getParentId().intValue() == pId){
                 MenuTree menuTree = new MenuTree();
                 menuTree.setId(sysPermission.getId());

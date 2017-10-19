@@ -16,15 +16,15 @@ public class PasswordHelper {
     private static int hashIterations = 2;
 
     public void setRandomNumberGenerator(RandomNumberGenerator randomNumberGenerator) {
-        this.randomNumberGenerator = randomNumberGenerator;
+        PasswordHelper.randomNumberGenerator = randomNumberGenerator;
     }
 
     public void setAlgorithmName(String algorithmName) {
-        this.algorithmName = algorithmName;
+        PasswordHelper.algorithmName = algorithmName;
     }
 
     public void setHashIterations(int hashIterations) {
-        this.hashIterations = hashIterations;
+        PasswordHelper.hashIterations = hashIterations;
     }
 
     public static UserInfo encryptPassword(UserInfo user) {
