@@ -39,30 +39,36 @@ public class SecKillServiceImpl implements SecKillService {
      * @return
      */
     @Override
-    public String kill(String customer, int goodsId) throws InterruptedException {
-        Thread.sleep(1000);
-        SecKill secKill = redisService.getSecKill(goodsId);
-        if(secKill == null){
-            secKill = secKillDao.findOne(goodsId);
+    public String kill(String customer, int goodsId) {
+        try {
+            Thread.sleep(10);
+            SecKill secKill = redisService.getSecKill(goodsId);
             if(secKill == null){
-                return "无此商品";
-            }else{
-                redisService.putSecKill(secKill);
+                secKill = secKillDao.findOne(goodsId);
+                if(secKill == null){
+                    return "无此商品";
+                }else{
+                    redisService.putSecKill(secKill);
+                }
             }
-        }
-        System.out.println("剩余数量： "+secKill.getRemainNum());
-        if(secKill.getRemainNum() > 0){
-            //如果secKill剩余数量大于0的话，则减1。
-            int resumeSecKill = secKillDao.update(secKill.getId());
-            if(resumeSecKill != 0){
-                SecKillOrder secKillOrder = new SecKillOrder(customer,goodsId,1);
-                secKillOrderDao.save(secKillOrder);
-                return "抢购成功";
+            System.out.println("剩余数量： "+secKill.getRemainNum());
+            if(secKill.getRemainNum() > 0){
+                //如果secKill剩余数量大于0的话，则减1。
+                Thread.sleep(1000);
+                int resumeSecKill = secKillDao.update(secKill.getId());
+                if(resumeSecKill != 0){
+                    SecKillOrder secKillOrder = new SecKillOrder(customer,goodsId,1);
+                    secKillOrderDao.save(secKillOrder);
+                    return "抢购成功";
+                }else {
+                    return "抢购失败";
+                }
             }else {
-                return "抢购失败";
+                return "暂时缺货";
             }
-        }else {
-            return "暂时缺货";
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return "抢购失败";
         }
     }
 }

@@ -18,7 +18,6 @@ public class RedisService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-
     public SecKill getSecKill(int key){
         SecKill secKill = (SecKill) redisTemplate.opsForValue().get("secKill"+key);
         return secKill;
@@ -34,4 +33,5 @@ public class RedisService {
         secKill.setRemainNum(secKill.getRemainNum() - 1);
         putSecKill(secKill);
     }
+
 }

@@ -103,19 +103,6 @@ public class SysRoleController {
         }
         return status;
     }
-//
-//    @RequestMapping("/userDelete")
-//    @ResponseBody
-//    public String userDelete(int delId){
-//        String status = ConstantUtil.FAIlED;
-//        try {
-//            userInfoService.delete(delId);
-//            status = ConstantUtil.SUCCESS;
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-//       return status;
-//    }
 
 
     /**
@@ -123,9 +110,6 @@ public class SysRoleController {
      */
     @RequestMapping("/assignPermissions")
     public String assignPermissions(Model model){
-//        logger.info("进来了");
-//        List<MenuTree> menuTrees =  sysPermissionService.createMenuTree();
-//        model.addAttribute("menuTrees",menuTrees);
         return "assignPermissions";
     }
     /**

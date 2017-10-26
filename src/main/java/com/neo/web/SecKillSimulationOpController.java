@@ -25,7 +25,7 @@ public class SecKillSimulationOpController {
         //httpClient工厂
         final SimpleClientHttpRequestFactory httpRequestFactory = new SimpleClientHttpRequestFactory();
         //开50个线程模拟并发秒杀下单
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 100; i++) {
             Thread.sleep(1);
             //购买人姓名
             final String consumerName = "consumer" + i;
@@ -37,6 +37,6 @@ public class SecKillSimulationOpController {
             }).start();
         }
         System.out.println("时间: "+(System.currentTimeMillis() - beforTime));
-        return "simulationCocurrentTakeOrder";
+        return "测试完成";
     }
 }
