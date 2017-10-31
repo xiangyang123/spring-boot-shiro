@@ -15,6 +15,7 @@ import java.util.Properties;
 
 /**
  * Created by zouxiang on 2017/9/14.
+ * @author zouxiang
  */
 @Configuration
 public class ShiroConfig {

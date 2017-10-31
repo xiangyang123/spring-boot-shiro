@@ -3,6 +3,7 @@ package com.neo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
@@ -15,6 +16,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * @author zouxiang
  */
 @SpringBootApplication
+@EnableCaching
 @ServletComponentScan
 @EnableJpaRepositories(
         includeFilters = @ComponentScan.Filter(
@@ -22,6 +24,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableElasticsearchRepositories(
         includeFilters = @ComponentScan.Filter(
                 type = FilterType.ASSIGNABLE_TYPE, classes = ElasticsearchRepository.class))
+
 public class SpringBootShiroApplication {
 
     public static void main(String[] args) {

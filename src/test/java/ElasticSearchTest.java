@@ -4,6 +4,9 @@ import com.neo.entity.Article;
 import com.neo.entity.Author;
 import com.neo.entity.Tutorial;
 import org.apache.commons.collections.IteratorUtils;
+import org.elasticsearch.action.admin.indices.analyze.AnalyzeAction;
+import org.elasticsearch.action.admin.indices.analyze.AnalyzeRequestBuilder;
+import org.elasticsearch.action.admin.indices.analyze.AnalyzeResponse;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -162,4 +165,21 @@ public class ElasticSearchTest {
         System.out.println(article);
 //        assertThat(article.size(), is(0));
     }
+
+
+    /**
+     * 缺少IK 分词器
+     */
+//    @Test
+//    public void getIkAnalyzeSearchTerms(){
+//        // 调用 IK 分词分词
+//        AnalyzeRequestBuilder ikRequest = new AnalyzeRequestBuilder(elasticsearchTemplate.getClient(),
+//                AnalyzeAction.INSTANCE,"projectname","蓝月亮");
+//        ikRequest.setTokenizer("ik");
+//        List<AnalyzeResponse.AnalyzeToken> ikTokenList = ikRequest.execute().actionGet().getTokens();
+//        for(AnalyzeResponse.AnalyzeToken analyzeToken :ikTokenList){
+//            System.out.println("IK 分词-----" + analyzeToken.getTerm());
+//        }
+//
+//    }
 }

@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 
 /**
  * Created by zouxiang on 2017/9/14.
+ * @author zouxiang
  */
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
@@ -22,6 +23,11 @@ public class UserInfoServiceImpl implements UserInfoService {
         return userInfoDao.findByUsername(username);
     }
 
+    /**
+     * 启用缓存技术
+     * @param pageable
+     * @return
+     */
     @Override
     public Page<UserInfo> findAll(Pageable pageable) {
         return userInfoDao.findAll(pageable);
