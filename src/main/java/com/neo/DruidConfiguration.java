@@ -76,6 +76,7 @@ public class DruidConfiguration {
         datasource.setPoolPreparedStatements(poolPreparedStatements);
         datasource.setMaxPoolPreparedStatementPerConnectionSize(maxPoolPreparedStatementPerConnectionSize);
         datasource.setUseGlobalDataSourceStat(useGlobalDataSourceStat);
+
         try {
             datasource.setFilters(filters);
         } catch (SQLException e) {

@@ -104,7 +104,12 @@
             <artifactId>jna</artifactId>
             <version>4.1.0</version>
         </dependency>
-
+        <!--logbak jar-->
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>4.9</version>
+        </dependency>
 
     </dependencies>
 

@@ -167,9 +167,9 @@ public class ElasticSearchTest {
     }
 
 
-    /**
-     * 缺少IK 分词器
-     */
+//    /**
+//     * 缺少IK 分词器
+//     */
 //    @Test
 //    public void getIkAnalyzeSearchTerms(){
 //        // 调用 IK 分词分词
