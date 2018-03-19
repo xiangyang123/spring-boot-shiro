@@ -3,6 +3,7 @@ package com.neo.service;
 import com.neo.SpringBootShiroApplication;
 import com.neo.dao.UserInfoDao;
 import com.neo.entity.UserInfo;
+import com.neo.util.ElasticsearchUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,12 @@ public class UserInfoServiceTest {
 //        userInfo.setUsername("邹翔3");
         userInfoDao.save(userInfo);
         List<UserInfo> userInfoList = userInfoDao.findAll();
+    }
+
+
+    @Test
+    public void createIndexTest(){
+//        ElasticsearchUtils.createIndex("java_index");
+        System.out.println(ElasticsearchUtils.searchListData("address","",0,"","",true,"message","message=北京"));
     }
 }
