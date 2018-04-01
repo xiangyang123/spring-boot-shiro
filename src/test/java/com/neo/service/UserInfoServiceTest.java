@@ -1,5 +1,6 @@
 package com.neo.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.neo.SpringBootShiroApplication;
 import com.neo.dao.UserInfoDao;
 import com.neo.entity.UserInfo;
@@ -34,6 +35,13 @@ public class UserInfoServiceTest {
     @Test
     public void createIndexTest(){
 //        ElasticsearchUtils.createIndex("java_index");
-        System.out.println(ElasticsearchUtils.searchListData("address","",0,"","",true,"message","message=北京"));
+        //System.out.println(ElasticsearchUtils.searchListData("address","",0,"","",true,"message","message=北京"));
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("user","王五");
+        jsonObject.put("title","扫地人员");
+        jsonObject.put("desc","专职扫地");
+        String msg = ElasticsearchUtils.addData(jsonObject,"accounts","person");
+        System.out.println(msg);
     }
 }

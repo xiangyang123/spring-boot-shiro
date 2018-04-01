@@ -59,8 +59,8 @@ public class ElasticsearchConfiguration  {
                     .addTransportAddress(new TransportAddress(InetAddress.getByName(hostName), Integer.valueOf(port)));
         } catch (Exception e) {
             logger.error("elasticsearch TransportClient create error!!!", e);
+            transportClient.close();
         }
-        System.out.println(transportClient.connectedNodes().size());
         return transportClient;
     }
 

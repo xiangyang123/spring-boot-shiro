@@ -43,6 +43,7 @@ public class ReentrantLockDemo {
 
                 boolean locked = false;
                 try {
+                    System.out.println("tryLock");
                     locked = lock.tryLock(5, TimeUnit.SECONDS);
                     System.out.println(locked);
                     if(locked){

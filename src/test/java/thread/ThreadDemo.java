@@ -22,7 +22,10 @@ public class ThreadDemo {
 //                    }
                 System.out.println("T1 start");
                 try {
+                    System.out.println("wait start");
                     threadDemo.wait();
+
+                    System.out.println("wait end");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -66,20 +69,23 @@ public class ThreadDemo {
 
 
 
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                synchronized (threadDemo){
-//                    try {
-//                        threadDemo.wait();
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (threadDemo){
+                    System.out.println("T3 start");
+                        threadDemo.notifyAll();
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println("T3 end");
 //                    threadDemo.over();
-//                }
-//
-//            }
-//        }).start();
+                }
+
+            }
+        }).start();
     }
 
 
